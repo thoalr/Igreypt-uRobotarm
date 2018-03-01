@@ -33,6 +33,7 @@
 /*
  *  ======== empty.c ========
  */
+
 #include <stdbool.h>
 
 /* XDCtools Header files */
@@ -81,16 +82,16 @@
 //Task_Handle task;
 
 /* variable to be read by GUI Composer */
-int count1 = 0;
-int count2 = 0;
+int count1 = 1;
+int count2 = 1;
 /* PWM constants */
 PWM_Handle pwm1;
 PWM_Handle pwm2 = NULL;
 PWM_Params params;
-uint16_t   pwmPeriod = 3000;      // Period and duty in microseconds
-uint16_t   duty1 = 0;
-uint16_t   duty2 = 0;
-uint16_t   dutyInc = 300;
+uint16_t   pwmPeriod = 20000;      // Period and duty in microseconds
+uint16_t   duty1 = 502;
+uint16_t   duty2 = 502;
+uint16_t   dutyInc = 200;
 /*
  *  ======== pwmLEDinit ========
  *  Initializes the PWM modeules for the on board LED.
@@ -118,7 +119,7 @@ Void pwmLEDinit()
     if (pwm1 == NULL) {
         System_abort("Board_PWM0 did not open");
     }
-
+    PWM_setDuty(pwm1, duty1);
     if (Board_PWM1 != Board_PWM0) {
         //params.polarity = PWM_POL_ACTIVE_LOW;
         pwm2 = PWM_open(Board_PWM1, &params);
@@ -126,6 +127,7 @@ Void pwmLEDinit()
             System_abort("Board_PWM1 did not open");
         }
     }
+    PWM_setDuty(pwm2, duty2);
 }
 
 /*
@@ -139,9 +141,9 @@ void gpioButtonFxn0(unsigned int index)
     PWM_setDuty(pwm1, duty1);
 
     if (count1++ >= 10) {
-        count1 = 0;
+        count1 = 1;
     }
-    duty1 = dutyInc*count1;
+    duty1 = dutyInc*count1+500;
 }
 
 /*
@@ -158,13 +160,25 @@ void gpioButtonFxn1(unsigned int index)
     }
 
     if (count2++ >= 10) {
-        count2 = 0;
+        count2 = 1;
     }
-    duty2 = dutyInc*count2;
+    duty2 = dutyInc*count2 +500;
 }
 
 
-
+/*
+ *  ======== mapRad ========
+ *  Map radians to pwm width value
+ *
+ */
+#define maxOut = 2500;
+#define minOut = 500;
+#define maxIn = 3.14159265359;
+#define minIn = 0;
+uint16_t mapRad(double rad) {
+    // matlab code @(x,a,b,c,d)   c+(x-a)*(d-c)/(b-a)
+    return (uint16_t) (minOut+ (rad-minIn)*(maxOut-minOut)/(maxIn-minIn) );
+}
 
 
 /*
