@@ -216,6 +216,7 @@ empty.obj: C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h
 empty.obj: C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h
 empty.obj: C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi__epilogue.h
 empty.obj: ../Board.h
+empty.obj: ../essentialFxn.h
 
 ../empty.c: 
 C:/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/stdbool.h: 
@@ -433,3 +434,4 @@ C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h:
 C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h: 
 C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi__epilogue.h: 
 ../Board.h: 
+../essentialFxn.h: 

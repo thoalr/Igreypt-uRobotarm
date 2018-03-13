@@ -13,7 +13,8 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../EK_TM4C123GXL.c \
-../empty.c 
+../empty.c \
+../essentialFxn.c 
 
 GEN_CMDS += \
 ./configPkg/linker.cmd 
@@ -27,25 +28,29 @@ GEN_MISC_DIRS += \
 
 C_DEPS += \
 ./EK_TM4C123GXL.d \
-./empty.d 
+./empty.d \
+./essentialFxn.d 
 
 GEN_OPTS += \
 ./configPkg/compiler.opt 
 
 OBJS += \
 ./EK_TM4C123GXL.obj \
-./empty.obj 
+./empty.obj \
+./essentialFxn.obj 
 
 GEN_MISC_DIRS__QUOTED += \
 "configPkg\" 
 
 OBJS__QUOTED += \
 "EK_TM4C123GXL.obj" \
-"empty.obj" 
+"empty.obj" \
+"essentialFxn.obj" 
 
 C_DEPS__QUOTED += \
 "EK_TM4C123GXL.d" \
-"empty.d" 
+"empty.d" \
+"essentialFxn.d" 
 
 GEN_FILES__QUOTED += \
 "configPkg\linker.cmd" \
@@ -53,6 +58,7 @@ GEN_FILES__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../EK_TM4C123GXL.c" \
-"../empty.c" 
+"../empty.c" \
+"../essentialFxn.c" 
 
 

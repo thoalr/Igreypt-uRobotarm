@@ -12,6 +12,7 @@ GEN_CMDS__FLAG := -l"configPkg/linker.cmd"
 ORDERED_OBJS += \
 "./EK_TM4C123GXL.obj" \
 "./empty.obj" \
+"./essentialFxn.obj" \
 "../EK_TM4C123GXL.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/grlib/ccs/Debug/grlib.lib" \
@@ -159,8 +160,8 @@ Project_robot_arm.hex: $(EXE_OUTPUTS)
 clean:
 	-$(RM) $(GEN_CMDS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_OPTS__QUOTED)
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
-	-$(RM) "EK_TM4C123GXL.obj" "empty.obj" 
-	-$(RM) "EK_TM4C123GXL.d" "empty.d" 
+	-$(RM) "EK_TM4C123GXL.obj" "empty.obj" "essentialFxn.obj" 
+	-$(RM) "EK_TM4C123GXL.d" "empty.d" "essentialFxn.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
