@@ -14,7 +14,8 @@ CMD_SRCS += \
 C_SRCS += \
 ../EK_TM4C123GXL.c \
 ../empty.c \
-../essentialFxn.c 
+../essentialFxn.c \
+../pwmControl.c 
 
 GEN_CMDS += \
 ./configPkg/linker.cmd 
@@ -29,7 +30,8 @@ GEN_MISC_DIRS += \
 C_DEPS += \
 ./EK_TM4C123GXL.d \
 ./empty.d \
-./essentialFxn.d 
+./essentialFxn.d \
+./pwmControl.d 
 
 GEN_OPTS += \
 ./configPkg/compiler.opt 
@@ -37,7 +39,8 @@ GEN_OPTS += \
 OBJS += \
 ./EK_TM4C123GXL.obj \
 ./empty.obj \
-./essentialFxn.obj 
+./essentialFxn.obj \
+./pwmControl.obj 
 
 GEN_MISC_DIRS__QUOTED += \
 "configPkg\" 
@@ -45,12 +48,14 @@ GEN_MISC_DIRS__QUOTED += \
 OBJS__QUOTED += \
 "EK_TM4C123GXL.obj" \
 "empty.obj" \
-"essentialFxn.obj" 
+"essentialFxn.obj" \
+"pwmControl.obj" 
 
 C_DEPS__QUOTED += \
 "EK_TM4C123GXL.d" \
 "empty.d" \
-"essentialFxn.d" 
+"essentialFxn.d" \
+"pwmControl.d" 
 
 GEN_FILES__QUOTED += \
 "configPkg\linker.cmd" \
@@ -59,6 +64,7 @@ GEN_FILES__QUOTED += \
 C_SRCS__QUOTED += \
 "../EK_TM4C123GXL.c" \
 "../empty.c" \
-"../essentialFxn.c" 
+"../essentialFxn.c" \
+"../pwmControl.c" 
 
 

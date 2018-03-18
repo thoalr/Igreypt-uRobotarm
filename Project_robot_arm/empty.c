@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2015, Texas Instruments Incorporated
+ * ================ empty.c ======================
+ *      Author: thors_000
+ *  Created on: 1 Mar 2018
+ *     version: 2.2
+ *     Comment: Contains any functions not exclusive to this project
  */
 
-/*
- *  ======== empty.c ========
- */
 #include <stdbool.h>
 
 /* XDCtools Header files */
@@ -41,66 +42,33 @@
 
 /* Our written headers  */
 #include "essentialFxn.h"
+#include "pwmControl.h"
 
-
+/* Task parameters */
 #define TASKSTACKSIZE   512
-//pwm
 Task_Struct tsk0Struct;
 UInt8 tsk0Stack[TASKSTACKSIZE];
 Task_Handle task;
 
-/* variable to be read by GUI Composer */
+/* Global variables */
 int count1 = 0;
 int count2 = 0;
 /* PWM constants */
 #define maxPWMwidth  2500.0
-#define minPWMwidth  502.0 // For our big ones 350.0 for the little one 500.0
-#define maxRad       pi
+#define minPWMwidth  400.0   // For our big ones 350.0 for the little one 500.0
+#define maxRad       PI
 #define minRad       0.0
-PWM_Handle pwm1;
-PWM_Handle pwm2 = NULL;
-PWM_Params params;
+/* PWM handles and necessary initialization parameters  */
+
+
+//PWM_Handle pwmPF2 = NULL;
+//PWM_Handle pwmPF3 = NULL;
+#define dutyInit     (maxPWMwidth+minPWMwidth)/2  //mapRad(PI/2)
+/* PWM values */
 uint16_t   pwmPeriod = 20000;      // Period and duty in microseconds
-uint16_t   duty1 = (uint16_t) maxPWMwidth;
-uint16_t   duty2 = (uint16_t) maxPWMwidth;
-uint16_t   dutyInc = 10;
-/*
- *  ======== pwmLEDinit ========
- *  Initializes the PWM modeules for the on board LED.
- */
-Void pwmLEDinit()
-{
-    //this is Board_initPWM()
-    /* Enable PWM peripherals */
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM1);
-
-    /*
-     * Enable PWM output on GPIO pins.  Board_LED1 and Board_LED2 are now
-     * controlled by PWM peripheral - Do not use GPIO APIs.
-     */
-    GPIOPinConfigure(GPIO_PF2_M1PWM6);
-    GPIOPinConfigure(GPIO_PF3_M1PWM7);
-    GPIOPinTypePWM(GPIO_PORTF_BASE, GPIO_PIN_2 |GPIO_PIN_3);
-
-    PWM_init();
-
-    // This is my part
-    PWM_Params_init(&params);
-    params.period = pwmPeriod;
-    pwm1 = PWM_open(Board_PWM0, &params);
-    if (pwm1 == NULL) {
-        System_abort("Board_PWM0 did not open");
-    }
-    PWM_setDuty(pwm1, duty1);
-//    if (Board_PWM1 != Board_PWM0) {
-//        params.polarity = PWM_POL_ACTIVE_HIGH;
-//        pwm2 = PWM_open(Board_PWM1, &params);
-//        if (pwm2 == NULL) {
-//            System_abort("Board_PWM1 did not open");
-//        }
-//    }
-    //PWM_setDuty(pwm2, duty2);
-}
+uint16_t   duty1 = (uint16_t) minPWMwidth;
+uint16_t   duty2 = (uint16_t) minPWMwidth;
+uint16_t   dutyInc = 40;
 
 /*
  *  ======== gpioButtonFxn0 ========
@@ -110,12 +78,12 @@ void gpioButtonFxn0(unsigned int index)
 {
     /* Clear the GPIO interrupt and toggle an LED */
     //GPIO_toggle(Board_LED0);
-    PWM_setDuty(pwm1, duty1);
+    PWM_setDuty(pwmPF2, minPWMwidth);
 
     if (count1++ >= 20) {
         count1 = -20;
     }
-    duty1 = dutyInc*count1+2500;
+    duty1 = dutyInc*count1+1000;
 }
 
 /*
@@ -131,9 +99,9 @@ void gpioButtonFxn1(unsigned int index)
     if (count1-- <= 0) {
         count1 = 20;
     }
-    duty1 = dutyInc*count1+2500;
+    duty1 = dutyInc*count1+1000;
 
-    PWM_setDuty(pwm1, duty1);
+    PWM_setDuty(pwmPF2, maxPWMwidth);
 }
 
 
@@ -164,35 +132,35 @@ void loop(UArg arg0, UArg arg1) {
     while(1) {
         //uint16_t inc = 430;
         double rad = 0;
-        double inc = pi;
-        while(1) {
+        double inc = PI;
+        while(count1 == 0) {
 
-            //System_printf("deg = %f\n",rad2deg(rad));
-            //System_printf("duty = %d\n",(int) duty1);
-            //System_flush();
+            System_printf("degrees = %f\n",rad2deg(rad));
+            System_printf("duty = %d\n",(int) duty1);
+            System_flush();
 
             duty1 = mapRad(rad);
 
-            PWM_setDuty(pwm1, duty1);
+            PWM_setDuty(pwmPF2, duty1);
 
-            if(rad >= pi) {
+            if(rad >= PI) {
                 rad = 0;
                 inc = inc / 2;
-                PWM_setDuty(pwm1, minPWMwidth);
+                PWM_setDuty(pwmPF2, minPWMwidth);
                 Task_sleep((UInt) (arg0*2) );
             }
             else {
-                rad = min(rad+inc,pi);
+                rad = min(rad+inc,PI);
             }
-            Task_sleep((UInt) (arg0 *(4*inc/pi)) );
-            //        if (pwm2) {
-            //            PWM_setDuty(pwm2, duty2);
+            Task_sleep((UInt) (arg0 *(4*inc/PI)) );
+            //        if (pwmPF3) {
+            //            PWM_setDuty(pwmPF3, duty2);
             //        }
 
 //            if(count1++ > (maxPWMwidth-minPWMwidth) / inc ) {
 //                count1 = 0;
 //                inc = inc/2;
-//                PWM_setDuty(pwm1, minPWMwidth);
+//                PWM_setDuty(pwmPF2, minPWMwidth);
 //                Task_sleep((UInt) (arg0));
 //            }
 //
@@ -232,8 +200,8 @@ int main(void)
     // Board_initWatchdog();
     // Board_initPWM();
 
-    /* Initialize pwm for onboard LEDs */
-    pwmLEDinit();
+    /* Initialize pwm for onboard LEDs */ // Also rename this once PWM pins are moved
+    pwmLEDinit(pwmPeriod,dutyInit);
 
     /* Construct LED Task thread */
     Task_Params_init(&tskParams);
@@ -257,7 +225,7 @@ int main(void)
     GPIO_enableInt(Board_BUTTON0);
 
     /*
-     *  If more than one input pin is available for your device, interrupts
+     *  If more than one input PIn is available for your device, interrupts
      *  will be enabled on Board_BUTTON1.
      */
     if (Board_BUTTON0 != Board_BUTTON1) {
