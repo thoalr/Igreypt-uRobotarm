@@ -23,15 +23,23 @@ double rad2deg(double rad) {
 }
 
 
+///*
+// *  ======== abs ========
+// *  returns absolute value
+// */
+//double abs(double y) {
+//    if(y>=0)
+//        return y;
+//    else
+//        return -y;
+//}
+
 /*
  *  ======== waitIdle ========
  *  Does nothing for m ms
  */
 void waitIdle(int m) {
-    int c = 16*m;
-    int i = 0;
-    for(i = 0; i < m; i++) {
-        c--;
-    }
+    int i;
+    for(i = 0; i < 16000*m; i++) { }
 }
 

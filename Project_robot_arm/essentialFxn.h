@@ -23,9 +23,13 @@
        __typeof__ (b) _b = (b); \
      _a < _b ? _a : _b; })
 
+
+
+
+
 /* Function definition */
 double rad2deg(double rad);
 void waitIdle(int m);
-
+//double abs(double y);
 
 #endif /* ESSENTIALFXN_H_ */
