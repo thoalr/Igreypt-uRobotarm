@@ -24,12 +24,15 @@
      _a < _b ? _a : _b; })
 
 
+#define signum(n) ({ (n < 0) ? -1 : (n > 0) ? +1 : 0; })
+#define absnum(n) ({ (n < 0) ? -1*(n) : n; })
 
 
 
 /* Function definition */
 double rad2deg(double rad);
 void waitIdle(int m);
+int invertInt(int n);
 //double abs(double y);
 
 #endif /* ESSENTIALFXN_H_ */

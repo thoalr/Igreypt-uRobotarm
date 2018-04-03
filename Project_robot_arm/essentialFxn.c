@@ -35,6 +35,17 @@ double rad2deg(double rad) {
 //}
 
 /*
+ *  ======== invertInt ========
+ *  Returns 1 if input is 0 else return 0
+ */
+int invertInt(int n) {
+    if(n == 0)
+        return 1;
+    else
+        return 0;
+}
+
+/*
  *  ======== waitIdle ========
  *  Does nothing for m ms
  */
