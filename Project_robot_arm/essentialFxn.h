@@ -2,8 +2,8 @@
  * essentialFxn.h
  *      Author: thors_000
  *  Created on: 3 Mar 2018
- *     version: 1.2
- *     Comment: Contains any function definitions not exclusive to this project
+ *     version: 1.3
+ *     Comment: Contains any essential function definitions
  */
 
 #ifndef ESSENTIALFXN_H_
@@ -31,6 +31,7 @@
 
 /* Function definition */
 double rad2deg(double rad);
+double deg2rad(double deg);
 void waitIdle(int m);
 int invertInt(int n);
 //double abs(double y);

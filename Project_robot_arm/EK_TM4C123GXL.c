@@ -156,6 +156,13 @@ GPIO_PinConfig gpioPinConfigs[] = {
     GPIOTiva_PF_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
     /* EK_TM4C123GXL_GPIO_SW2 */
     GPIOTiva_PF_0 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    /* EK_TM4C123GXL_GPIO_PC4 */
+    GPIOTiva_PC_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    /* EK_TM4C123GXL_GPIO_PC5 */
+    GPIOTiva_PC_5 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    /* EK_TM4C123GXL_GPIO_PC6 */
+    GPIOTiva_PC_6 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+
 
     /* Output pins */
     /* EK_TM4C123GXL_LED_RED */
@@ -175,7 +182,10 @@ GPIO_PinConfig gpioPinConfigs[] = {
  */
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
     NULL,  /* EK_TM4C123GXL_GPIO_SW1 */
-    NULL   /* EK_TM4C123GXL_GPIO_SW2 */
+    NULL,   /* EK_TM4C123GXL_GPIO_SW2 */
+    NULL,
+    NULL,
+    NULL
 };
 
 /* The device-specific GPIO_config structure */

@@ -58,7 +58,11 @@ extern "C" {
 #define Board_LED2                  EK_TM4C123GXL_LED_RED
 #define Board_BUTTON0               EK_TM4C123GXL_SW1
 #define Board_BUTTON1               EK_TM4C123GXL_SW2
-
+/* --------------- MINE  ----------------*/
+#define Board_BUTTONPC4             EK_TM4C123GXL_GPIO_PC4
+#define Board_BUTTONPC5             EK_TM4C123GXL_GPIO_PC5
+#define Board_BUTTONPC6             EK_TM4C123GXL_GPIO_PC6
+/* --------------- MINE -----------*/
 #define Board_I2C0                  EK_TM4C123GXL_I2C0
 #define Board_I2C1                  EK_TM4C123GXL_I2C3
 #define Board_I2C_TMP               EK_TM4C123GXL_I2C3

@@ -2,8 +2,8 @@
  * essentialFxn.c
  *      Author: thors_000
  *  Created on: 3 Mar 2018
- *     version: 1.2
- *     Comment: Contains any functions not exclusive to this project
+ *     version: 1.3
+ *     Comment: Contains any essential functions
  */
 
 /*
@@ -14,14 +14,22 @@
 #include "essentialFxn.h"
 
 /*
- *  ======== mapRad ========
- *  Map radians to pwm width value
+ *  ======== rad2deg ========
+ *  Map radians to degrees
  */
 double rad2deg(double rad) {
     // matlab code @(x,a,b,c,d)   c+(x-a)*(d-c)/(b-a)
     return rad*180.0/PI;
 }
 
+/*
+ *  ======== deg2rad ========
+ *  Map degrees to radians
+ */
+double deg2rad(double deg) {
+    // matlab code @(x,a,b,c,d)   c+(x-a)*(d-c)/(b-a)
+    return deg*PI/180;
+}
 
 ///*
 // *  ======== abs ========
@@ -47,10 +55,10 @@ int invertInt(int n) {
 
 /*
  *  ======== waitIdle ========
- *  Does nothing for m ms
+ *  Doe nothing for m ms
  */
 void waitIdle(int m) {
     int i;
-    for(i = 0; i < 16000*m; i++) { }
+    for(i = 0; i < 1600*m; i++) { }
 }
 
